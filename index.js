@@ -1,17 +1,18 @@
 const express = require("express");
 const app = express();
 const cors = require("cors");
-require("dotenv").config();
+const dotenv = require("dotenv").config()
 const mongoose = require("mongoose");
 
-// mongoose.connect(process.env.MONGO_URL)
-// .then((success)=>console.log("db is connected successfully"))
-// .catch((err)=>console.log(err.message));
 
-mongoose
-  .connect("mongodb://127.0.0.1:27017/tracker")
-  .then(() => console.log("db is connected successfully"))
-  .catch((error) => console.log(error.message));
+
+mongoose.connect(process.env.MONGO_URL).then(()=>console.log("db is connected")).catch((error)=> console.log(error.message))
+console.log(process.env.MONGO_URL)
+console.log(process.env.PORT)
+// mongoose
+//   .connect("mongodb://127.0.0.1:27017/tracker")
+//   .then(() => console.log("db is connected successfully"))
+//   .catch((error) => console.log(error.message));
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
