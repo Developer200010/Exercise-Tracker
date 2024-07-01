@@ -57,6 +57,7 @@ app.post("/api/users/:_id/exercises", async function(req,res){
   const userId = req.body[':_id'];
  const foundUser= await User.findById(userId);
 
+
  if(!foundUser){
   res.json({message:'No user with such id'});
  }
@@ -73,7 +74,7 @@ app.post("/api/users/:_id/exercises", async function(req,res){
     date: date.toDateString(),
     userId
   })
-  res.send({
+  res.json({
    username:foundUser.username,
     description,
     duration,
@@ -81,6 +82,7 @@ app.post("/api/users/:_id/exercises", async function(req,res){
     _id:userId,
   })
 });
+
 
 app.get("/api/users/:_id/logs",async function(req,res){
   let{limit, from, to } = req.query;
@@ -115,12 +117,12 @@ app.get("/api/users/:_id/logs",async function(req,res){
   })
   res.json({
     username: foundUser.username,
-    count: exercise.length,
+    count: exercises.length,
     _id:userId,
     log:exercises
   })
 })
 
-const listener = app.listen(process.env.PORT || 3000, () => {
+const listener = app.listen(process.env.PORT || 5000, () => {
   console.log("Your app is listening on port " + listener.address().port);
 });
